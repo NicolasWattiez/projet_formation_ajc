@@ -1,3 +1,7 @@
+CREATE DATABASE if not exists qcm_app;
+
+USE qcm_app;
+
 CREATE TABLE `users` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `pseudo` varchar(255),

@@ -1,0 +1,25 @@
+sudo apt update
+sudo apt install mariadb-server
+sudo systemctl start mariadb.service
+sudo mysql_secure_installation
+
+export MARIADB_USER=user MARIADB_PASSWORD=mdp DB_NAME=qcm_app DB_HOST=localhost
+
+
+
+sudo mariadb -e "GRANT ALL ON *.* TO '$MARIADB_USER'@'$DB_HOST' IDENTIFIED BY '$MARIADB_PASSWORD' WITH GRANT OPTION;"
+sudo mariadb -e "FLUSH PRIVILEGES;"
+
+sudo apt install libmariadb3 libmariadb-dev
+sudo apt-get install libmariadbclient-dev
+
+sudo apt-get install python3-dev default-libmysqlclient-dev build-essential
+
+
+
+import mariadb
+import config
+import connnect_db as db
+
+bdd = db.ConnectDb(config.config)
+connexion = bdd.connect()
