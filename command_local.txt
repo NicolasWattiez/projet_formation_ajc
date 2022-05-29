@@ -19,7 +19,7 @@ sudo apt-get install python3-dev default-libmysqlclient-dev build-essential
 
 import mariadb
 import config
-import connnect_db as db
+import connect_db as db
 
 bdd = db.ConnectDb(config.config)
 connexion = bdd.connect()
