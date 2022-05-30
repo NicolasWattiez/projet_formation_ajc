@@ -25,14 +25,9 @@ CREATE TABLE `join_qcm_questions` (
 
 CREATE TABLE `questions` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
-  `name` varchar(255)
-);
-
-CREATE TABLE `answers` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `name` varchar(255),
   `answers` varchar(255),
-  `correct_answer` varchar(255),
-  `question_id` int
+  `correct_answer` varchar(255)
 );
 
 ALTER TABLE `join_user_qcm` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
@@ -42,5 +37,3 @@ ALTER TABLE `join_user_qcm` ADD FOREIGN KEY (`qcm_id`) REFERENCES `qcm` (`id`);
 ALTER TABLE `join_qcm_questions` ADD FOREIGN KEY (`qcm_id`) REFERENCES `qcm` (`id`);
 
 ALTER TABLE `join_qcm_questions` ADD FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`);
-
-ALTER TABLE `answers` ADD FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`);
