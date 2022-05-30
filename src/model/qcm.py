@@ -61,4 +61,6 @@ connexion = bdd.connect()
 cursor = connexion.cursor()
 test_qcm = Qcm(cursor)
 
-test_qcm.update_data()
+# test_qcm.update_data()
+print(test_qcm.get_data())
+

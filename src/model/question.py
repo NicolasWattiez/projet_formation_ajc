@@ -31,10 +31,5 @@ import connect_db as db
 
 bdd = db.ConnectDb(config.config)
 connexion = bdd.connect()
-# déclarer le cursor ici
 
-test_question = Question(cursor)
-
-
-test_question.get_data()
 
