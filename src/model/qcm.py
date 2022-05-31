@@ -17,8 +17,8 @@ class Qcm:
 
     def get_data(self,name):
         name_qcm=name
-        cursor=connexion.cursor()
-        cursor.execute('SELECT * FROM qcm WHERE name = ?;',
+        # cursor=connexion.cursor()
+        self.cursor.execute('SELECT * FROM qcm WHERE name = ?;',
         (name_qcm,)
         )
         print_data=cursor.fetchone()
@@ -27,11 +27,11 @@ class Qcm:
     def insert_data(self,name):
         new_qcm=name
         try:
-            cursor=connexion.cursor()
-            cursor.execute('INSERT INTO qcm (`name`) VALUES (?);',
+            # cursor=connexion.cursor()
+            self.cursor.execute('INSERT INTO qcm (`name`) VALUES (?);',
             (new_qcm,)
             )
-            connexion.commit()
+            # connexion.commit()
             return 'Le QCM a bien été ajoutée'
         except mariadb.Error as e:
             return 'Erreur lors de l\'ajout du nouveau qcm {e} '
@@ -40,11 +40,11 @@ class Qcm:
     def remove_data(self,name):
         delete_qcm=name
         try:
-            cursor = connexion.cursor()
-            cursor.execute('DELETE FROM qcm WHERE name = ?;',
+            # cursor = connexion.cursor()
+            self.cursor.execute('DELETE FROM qcm WHERE name = ?;',
             (delete_qcm,)
             )
-            connexion.commit()
+            # connexion.commit()
             return 'Le QCM à bien été supprimée'
         except mariadb.Error as e:
             return 'Erreur lors de la suppression du qcm {e}' 
@@ -55,11 +55,11 @@ class Qcm:
         update_qcm=name
         new_qcm_name=new_name
         try:
-            cursor = connexion.cursor()
-            cursor.execute('UPDATE qcm SET `name` = ? WHERE `name` = ?;',
+            # cursor = connexion.cursor()
+            self.cursor.execute('UPDATE qcm SET `name` = ? WHERE `name` = ?;',
             (new_qcm_name,update_qcm)
             )
-            connexion.commit()
+            # connexion.commit()
             return 'Le QCM a bien été modifiée'
         except mariadb.Error as e:
             return ' Erreur lors de la modification du qcm {e}' 
@@ -70,6 +70,7 @@ if __name__ == "__main__":
 
     bdd = db.ConnectDb(config.config)
     connexion = bdd.connect()
+    connexion.autocommit = True
     cursor = connexion.cursor()
     test_qcm = Qcm(cursor)
 
@@ -77,4 +78,8 @@ if __name__ == "__main__":
     a=input('nom du qcm :')
     b=input('nouveau nom du qcm :')
     print(test_qcm.update_data(a,b))
+    
+
+
+   
 
