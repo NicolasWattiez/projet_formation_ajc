@@ -17,9 +17,12 @@ class Question():
             self.__name = name
 
 
-    def get_data(self):
+    def get_data(self,id):
+        numero_id=id
         cursor=connexion.cursor()
-        cursor.execute('SELECT * FROM questions WHERE id = "1";')
+        cursor.execute('SELECT * FROM questions WHERE id = ?;',
+        (numero_id,)
+        )
         print_data=cursor.fetchone()
         return print_data
 
@@ -67,6 +70,7 @@ cursor = connexion.cursor()
 test_question = Question(cursor)
 
 # test_qcm.update_data()
-print(test_question.update_data())
+a=input('id de la question:')
+print(test_question.get_data(a))
 
 
