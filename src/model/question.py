@@ -7,7 +7,7 @@ class Question(Table):
 
 
     def get_data(self):
-        self.cursor.execute("")
+        # self.cursor.execute("")
         pass
 
     def insert_data(self):
@@ -31,6 +31,11 @@ import connect_db as db
 
 bdd = db.ConnectDb(config.config)
 connexion = bdd.connect()
+cursor = connexion.cursor()
+
+cursor.execute('INSERT INTO `qcm` VALUES (1, "Histoire");')
+cursor.execute('SELECT * FROM qcm')
+print(cursor.fetchall())
 # déclarer le cursor ici
 
 test_question = Question(cursor)
