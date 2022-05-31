@@ -52,9 +52,9 @@ class Qcm:
 
 
 
-    def update_data(self,name):
+    def update_data(self,name,new_name):
         update_qcm=name
-        new_qcm_name=input('nouveau nom de votre qcm :')
+        new_qcm_name=new_name
         try:
             cursor = connexion.cursor()
             cursor.execute('UPDATE qcm SET `name` = ? WHERE `name` = ?;',
@@ -76,5 +76,6 @@ test_qcm = Qcm(cursor)
 
 # test_qcm.update_data()
 a=input('nom du qcm :')
-print(test_qcm.update_data(a))
+b=input('nouveau nom du qcm :')
+print(test_qcm.update_data(a,b))
 
