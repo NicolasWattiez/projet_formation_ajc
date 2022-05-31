@@ -15,23 +15,23 @@ class Qcm:
         if isinstance(name, str):
             self.__name = name
 
-    def get_data(self,name):
+    def get_data(self,name="name"):
         name_qcm=name
-        cursor=connexion.cursor()
-        cursor.execute('SELECT * FROM qcm WHERE name = ?;',
+        # cursor=connexion.cursor()
+        self.cursor.execute('SELECT * FROM qcm WHERE name = ?;',
         (name_qcm,)
         )
-        print_data=cursor.fetchone()
+        print_data=self.cursor.fetchall()
         return print_data
 
     def insert_data(self,name):
         new_qcm=name
         try:
-            cursor=connexion.cursor()
-            cursor.execute('INSERT INTO qcm (`name`) VALUES (?);',
+            # cursor=connexion.cursor()
+            self.cursor.execute('INSERT INTO qcm (`name`) VALUES (?);',
             (new_qcm,)
             )
-            connexion.commit()
+            # connexion.commit()
             return 'Le QCM a bien été ajoutée'
         except mariadb.Error as e:
             return 'Erreur lors de l\'ajout du nouveau qcm {e} '

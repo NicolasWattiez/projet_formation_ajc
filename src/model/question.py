@@ -19,7 +19,7 @@ class Question():
 
     def get_data(self,id):
         numero_id=id
-        # cursor=connexion.cursor()k
+        # cursor=connexion.cursor()
         self.cursor.execute('SELECT * FROM questions WHERE id = ?;',
         (numero_id,)
         )

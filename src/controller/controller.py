@@ -16,9 +16,13 @@ class Controller():
 
     #### Admin ####
 
-    def create_qcm():
-        # ask for qcm name
-        # insert new qcm
+    def get_qcm(self):
+        query_list_qcm = self.qcm.get_data()
+        return self.query_to_dictionnary(self.qcm.cursor)
+
+    def create_qcm(self):
+        new_qcm_name = input("Enter the name of the new qcm")
+        self.qcm.insert_data(new_qcm_name)
         # ask if the user want to add questions to this qcm
             # get id qcm
             # call create_question() => return question values
@@ -27,13 +31,14 @@ class Controller():
         pass
 
 
-    def remove_qcm():
-        # get id_qcm
+    def remove_qcm(self):
+        name_qcm_to_delete = input("Enter the name of the qcm to delete")
+        id_qcm_to_delete = self.qcm.get_data(name_qcm_to_delete)
         # question do you want to also remove related question # WARNING the questions will also be removed from all qcm
             # get related id_question
         # remove in join_qcm_questions by qcm_id 
             # and remove related id_question
-        # remove qcm_id in qcm
+        self.qcm.remove_data(name_qcm_to_delete)
             # remove id_question from question
         # commit change
         pass
@@ -42,22 +47,23 @@ class Controller():
         # check if qcm exists
         pass
 
-    def create_question():
+    def create_question(self):
         question_values = {"name": "", "answers": "", "correct_answer": ""}
         question_values["name"]
-        # ask what is the question
-        # ask what are the answers
-        # ask what is the correct answers
-        # insert new question
+        question = input("Enter the question: ")
+        answers = input("Enter the answers: ")
+        correct_answer = input("Enter the question: ")
+        question_values.update({"name": question, "answers": answers, "correct_answer": correct_answer})
+        self.question.insert_data(question_values)
         return question_values
         # ask if the user want to add the question to a qcm (put that outside?)
 
-    def remove_question():
+    def remove_question(self):
         # remove question by id
         # remove id_question from join table
         pass
 
-    def update_question():
+    def update_question(self):
         # check if question exists
         pass
 
@@ -101,7 +107,7 @@ class Controller():
     # move to table
     # Taken from https://stackoverflow.com/questions/28755505/how-to-convert-sql-query-results-into-a-python-dictionary
 
-    def query_to_dictionnary(cursor):
+    def query_to_dictionnary(self, cursor):
         desc = cursor.description
         column_names = [col[0] for col in desc]
         dictionnary_list = [dict(zip(column_names, row))  

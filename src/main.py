@@ -17,3 +17,6 @@ question = Question(cursor)
 qcm = Qcm(cursor)
 
 test = Controller(qcm, question)
+
+print(test.get_qcm())
+connexion.commit()
