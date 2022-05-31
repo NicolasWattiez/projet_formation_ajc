@@ -25,7 +25,12 @@ class Question():
             self.cursor.execute('SELECT * FROM questions WHERE id = ?;',
             (numero_id,)
             )
-
+    
+    def get_data_by_name(self,name):
+        nametofind=name
+        self.cursor.execute('SELECT id FROM questions WHERE name = ?;',
+        (nametofind,)
+        )
 
     def insert_data(self,question_values):
         question=question_values["name"]
@@ -84,9 +89,10 @@ if __name__ == "__main__":
 
     # test_qcm.update_data()
     a=input('id de la question:')
+    nameforfind="test ?"
     question_values = {"name": "Ton fruit encore ?", "answers": "orange,bananane,kiwi", "correct_answer": "kiwi"}
     new_question_values ={"name": "Ta couleur favorite again ?", "answers": "rouge,vert,noir", "correct_answer": "noir"}
-    print(test_question.update_data(a,new_question_values))
+    print(test_question.get_data_by_name(nameforfind))
 
 
 
