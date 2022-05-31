@@ -70,9 +70,9 @@ class Jointure:
         idqcm=id_qcm
         try:
             # cursor = connexion.cursor()
-            self.cursor.execute('SELECT question_id FROM join_qcm_questions WHERE qcm_id = ?;',
-        (idqcm,)
-        )
+            self.cursor.execute('SELECT id,name,answers,correct_answer FROM (SElECT * FROM questions INNER JOIN join_qcm_questions WHERE join_qcm_questions.question_id=questions.id ) AS a WHERE qcm_id = ?;',
+            (idqcm,)
+            )
             list_id_question=cursor.fetchall()
             # connexion.commit()
             return list_id_question
