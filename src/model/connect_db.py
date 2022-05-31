@@ -18,6 +18,8 @@ class ConnectDb:
                 port=self.__port,
                 database=self.__database
             )
-            return conn
+            
         except mariadb.Error as e:
             return f"Error connecting to MariaDB Platform: {e}"
+        
+        return conn
