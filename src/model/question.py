@@ -18,16 +18,11 @@ class Question():
 
 
     def get_data(self):
-<<<<<<< HEAD
-        # self.cursor.execute("")
-        pass
-=======
         cursor=connexion.cursor()
         cursor.execute('SELECT * FROM questions WHERE id = "1";')
         print_data=cursor.fetchone()
         return print_data
 
->>>>>>> 55a3ad3290a45371e5fc330e7d2deef69bafb8ca
 
     def insert_data(self):
         try:
@@ -69,15 +64,6 @@ import connect_db as db
 bdd = db.ConnectDb(config.config)
 connexion = bdd.connect()
 cursor = connexion.cursor()
-<<<<<<< HEAD
-
-cursor.execute('INSERT INTO `qcm` VALUES (1, "Histoire");')
-cursor.execute('SELECT * FROM qcm')
-print(cursor.fetchall())
-# déclarer le cursor ici
-
-=======
->>>>>>> 55a3ad3290a45371e5fc330e7d2deef69bafb8ca
 test_question = Question(cursor)
 
 # test_qcm.update_data()
