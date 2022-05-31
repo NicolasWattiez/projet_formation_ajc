@@ -15,14 +15,19 @@ class Qcm:
         if isinstance(name, str):
             self.__name = name
 
-    def get_data(self,name="name"):
+    def get_data(self,name=None):
         name_qcm=name
+        print("name")
+        print("name == None?", name == None)
         # cursor=connexion.cursor()
-        self.cursor.execute('SELECT * FROM qcm WHERE name = ?;',
-        (name_qcm,)
-        )
-        print_data=self.cursor.fetchall()
-        return print_data
+        if name == None:
+            print("all")
+            self.cursor.execute('SELECT * FROM qcm;')      
+        else:
+            print("one")
+            self.cursor.execute('SELECT * FROM qcm WHERE name = ?;',
+            (name_qcm,)
+            )
 
     def insert_data(self,name):
         new_qcm=name

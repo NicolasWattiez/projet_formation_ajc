@@ -17,14 +17,14 @@ class Question():
             self.__name = name
 
 
-    def get_data(self,id):
+    def get_data(self,id=None):
         numero_id=id
-        # cursor=connexion.cursor()
-        self.cursor.execute('SELECT * FROM questions WHERE id = ?;',
-        (numero_id,)
-        )
-        print_data=cursor.fetchone()
-        return print_data
+        if id == None:
+            self.cursor.execute('SELECT * FROM questions;')
+        else: 
+            self.cursor.execute('SELECT * FROM questions WHERE id = ?;',
+            (numero_id,)
+            )
 
 
     def insert_data(self,question_values):
@@ -32,11 +32,9 @@ class Question():
         all_answers=question_values["answers"]
         good_answer=question_values["correct_answer"]
         try:
-            # cursor = connexion.cursor()
             self.cursor.execute('INSERT INTO questions (name,answers,correct_answer) VALUES (?,?,?);',
             (question,all_answers,good_answer)
             )
-            # connexion.commit()
             return 'La question a bien été ajoutée'
         except mariadb.Error as e:
             return 'Erreur lors de l\'ajout de la question {e} '

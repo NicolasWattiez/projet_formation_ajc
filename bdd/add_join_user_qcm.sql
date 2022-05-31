@@ -1,3 +1,4 @@
+USE qcm_app;
 INSERT INTO `join_user_qcm`
 VALUES (
   (SELECT id 

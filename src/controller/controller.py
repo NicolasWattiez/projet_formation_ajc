@@ -1,3 +1,4 @@
+from getpass import getpass
 
 class Controller():
     def __init__(self, qcm, question) -> None:
@@ -6,10 +7,11 @@ class Controller():
 
     ##### connexion #####
 
-    def connexion():
+    def connexion(self):
         pseudo = input("Enter your pseudo: ")
-        password = input("Enter your password")
-        pass
+        # password = input("Enter your password: ")
+        password = getpass("Enter your password: ")
+        
 
 
 
@@ -17,11 +19,11 @@ class Controller():
     #### Admin ####
 
     def get_qcm(self):
-        query_list_qcm = self.qcm.get_data()
+        self.qcm.get_data()
         return self.query_to_dictionnary(self.qcm.cursor)
 
     def create_qcm(self):
-        new_qcm_name = input("Enter the name of the new qcm")
+        new_qcm_name = input("Enter the name of the new qcm: ")
         self.qcm.insert_data(new_qcm_name)
         # ask if the user want to add questions to this qcm
             # get id qcm
@@ -43,9 +45,14 @@ class Controller():
         # commit change
         pass
 
-    def update_qcm():
+    def update_qcm(self):
         # check if qcm exists
         pass
+
+    def get_question(self):
+        self.question.get_data()
+        return self.query_to_dictionnary(self.question.cursor)
+
 
     def create_question(self):
         question_values = {"name": "", "answers": "", "correct_answer": ""}
@@ -67,16 +74,16 @@ class Controller():
         # check if question exists
         pass
 
-    def add_question_to_qcm(id_question, id_qcm):
+    def add_question_to_qcm(self, id_question, id_qcm):
         pass
 
-    def remove_question_from_qcm(id_question, id_qcm):
+    def remove_question_from_qcm(self, id_question, id_qcm):
         pass
 
 
     ##### User ####
 
-    def select_qcm(qcms):
+    def select_qcm(self, qcms):
         for qcm in qcms:
             print(qcm["name"])
         user_choice = input(
@@ -87,7 +94,7 @@ class Controller():
 
 
 
-    def practice_qcm(questions):
+    def practice_qcm(self, questions):
         for question in questions:
             print(question["name"])
             for answer in question["answers"].split(","):
