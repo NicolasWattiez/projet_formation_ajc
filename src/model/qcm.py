@@ -16,39 +16,52 @@ class Qcm:
         if isinstance(name, str):
             self.__name = name
 
-    def get_data(self):
+    def get_data(self,name):
+        name_qcm=name
         cursor=connexion.cursor()
-        cursor.execute('SELECT * FROM qcm WHERE name = "Musique";')
+        cursor.execute('SELECT * FROM qcm WHERE name = ?;',
+        (name_qcm,)
+        )
         print_data=cursor.fetchone()
         return print_data
 
-    def insert_data(self):
+    def insert_data(self,name):
+        new_qcm=name
         try:
             cursor=connexion.cursor()
-            cursor.execute('INSERT INTO qcm (`name`) VALUES ("ciné");')
+            cursor.execute('INSERT INTO qcm (`name`) VALUES (?);',
+            (new_qcm,)
+            )
             connexion.commit()
             return 'Le QCM a bien été ajoutée'
         except mariadb.Error as e:
             return 'Erreur lors de l\'ajout du nouveau qcm {e} '
 
 
-    def remove_data(self):
+    def remove_data(self,name):
+        delete_qcm=name
         try:
             cursor = connexion.cursor()
-            cursor.execute('DELETE FROM qcm WHERE name = "ciné";')
+            cursor.execute('DELETE FROM qcm WHERE name = ?;',
+            (delete_qcm,)
+            )
             connexion.commit()
-            return 'La machine à bien été supprimée'
+            return 'Le QCM à bien été supprimée'
         except mariadb.Error as e:
             return 'Erreur lors de la suppression du qcm {e}' 
 
 
 
-    def update_data(self):
+    def update_data(self,name,new_name):
+        update_qcm=name
+        new_qcm_name=new_name
         try:
             cursor = connexion.cursor()
-            cursor.execute('UPDATE qcm SET `name` = "film" WHERE `id` = 4;')
+            cursor.execute('UPDATE qcm SET `name` = ? WHERE `name` = ?;',
+            (new_qcm_name,update_qcm)
+            )
             connexion.commit()
-            return 'La machine a bien été modifiée'
+            return 'Le QCM a bien été modifiée'
         except mariadb.Error as e:
             return ' Erreur lors de la modification du qcm {e}' 
 
@@ -62,5 +75,7 @@ cursor = connexion.cursor()
 test_qcm = Qcm(cursor)
 
 # test_qcm.update_data()
-print(test_qcm.get_data())
+a=input('nom du qcm :')
+b=input('nouveau nom du qcm :')
+print(test_qcm.update_data(a,b))
 
