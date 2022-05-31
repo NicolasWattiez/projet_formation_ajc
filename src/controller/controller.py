@@ -1,9 +1,10 @@
 from getpass import getpass
 
 class Controller():
-    def __init__(self, qcm, question) -> None:
+    def __init__(self, qcm, question, jointure) -> None:
         self.qcm = qcm
         self.question = question
+        self.jointure = jointure
 
     ##### connexion #####
 
@@ -23,13 +24,19 @@ class Controller():
         return self.query_to_dictionnary(self.qcm.cursor)
 
     def create_qcm(self):
-        new_qcm_name = input("Enter the name of the new qcm: ")
+        new_qcm_name = input('Enter the name of the new qcm: ')
         self.qcm.insert_data(new_qcm_name)
-        # ask if the user want to add questions to this qcm
-            # get id qcm
-            # call create_question() => return question values
-            # question_id from question values
-            # call add_question_to_qcm(id_qcm, id_question)
+        user_choice = input('Enter "yes" if you want to add questiond now: ')
+        if user_choice == 'yes':
+            self.qcm.get_data(new_qcm_name)
+            dict_new_qcm = self.query_to_dictionnary(self.qcm.cursor)
+            adding_questions = True
+            while adding_questions:
+                dict_new_question = self.create_question()
+                self.question.get_data()
+                # call create_question() => return question values
+                # question_id from question values
+                # call add_question_to_qcm(id_qcm, id_question)
         pass
 
 
@@ -65,20 +72,19 @@ class Controller():
         return question_values
         # ask if the user want to add the question to a qcm (put that outside?)
 
-    def remove_question(self):
-        # remove question by id
-        # remove id_question from join table
-        pass
+    def remove_question(self, id):
+        self.jointure.delete_all_link_question(id)
+        self.question.remove_data(id)
 
     def update_question(self):
         # check if question exists
         pass
 
-    def add_question_to_qcm(self, id_question, id_qcm):
-        pass
+    def add_question_to_qcm(self, id_qcm, id_question):
+        self.jointure.link_qcm_question(id_qcm, id_question)
 
-    def remove_question_from_qcm(self, id_question, id_qcm):
-        pass
+    def remove_question_from_qcm(self, id_qcm,  id_question):
+        self.jointure.delete_link_qcm_question(id_qcm, id_question)
 
 
     ##### User ####

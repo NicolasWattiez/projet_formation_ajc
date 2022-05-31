@@ -4,7 +4,7 @@ from controller import *
 from model.config import config
 from model.question import Question
 from model.qcm import Qcm
-
+from model.jointure import Jointure
 
 from model import connect_db as db
 
@@ -16,8 +16,9 @@ cursor = connexion.cursor()
 
 question = Question(cursor)
 qcm = Qcm(cursor)
+jointure = Jointure(cursor)
 
-test = Controller(qcm, question)
+test = Controller(qcm, question, jointure)
 
 print(test.get_qcm())
 print(test.get_question())
