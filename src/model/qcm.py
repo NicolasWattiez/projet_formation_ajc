@@ -1,12 +1,11 @@
 from unicodedata import name
-import table
 import mariadb
 
 
 class Qcm:
     
     def __init__(self, cursor):
-        table.Table(cursor)
+        self.cursor = cursor
         self.__name = ''
     
     def get_name(self):
@@ -65,17 +64,17 @@ class Qcm:
         except mariadb.Error as e:
             return ' Erreur lors de la modification du qcm {e}' 
 
-####
-import config
-import connect_db as db
+if __name__ == "__main__":
+    import config
+    import connect_db as db
 
-bdd = db.ConnectDb(config.config)
-connexion = bdd.connect()
-cursor = connexion.cursor()
-test_qcm = Qcm(cursor)
+    bdd = db.ConnectDb(config.config)
+    connexion = bdd.connect()
+    cursor = connexion.cursor()
+    test_qcm = Qcm(cursor)
 
-# test_qcm.update_data()
-a=input('nom du qcm :')
-b=input('nouveau nom du qcm :')
-print(test_qcm.update_data(a,b))
+    # test_qcm.update_data()
+    a=input('nom du qcm :')
+    b=input('nouveau nom du qcm :')
+    print(test_qcm.update_data(a,b))
 

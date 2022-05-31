@@ -1,12 +1,12 @@
 
 from unicodedata import name
-import table
+# import table
 import mariadb
 
 
 class Question():
     def __init__(self, cursor):
-        table.Table(cursor)
+        self.cursor = cursor
         self.__name = ''
     
     def get_name(self):
@@ -19,8 +19,8 @@ class Question():
 
     def get_data(self,id):
         numero_id=id
-        cursor=connexion.cursor()
-        cursor.execute('SELECT * FROM questions WHERE id = ?;',
+        # cursor=connexion.cursor()k
+        self.cursor.execute('SELECT * FROM questions WHERE id = ?;',
         (numero_id,)
         )
         print_data=cursor.fetchone()
@@ -32,7 +32,7 @@ class Question():
         all_answers=question_values["answers"]
         good_answer=question_values["correct_answer"]
         try:
-            cursor=connexion.cursor()
+            cursor = connexion.cursor()
             cursor.execute('INSERT INTO questions (name,answers,correct_answer) VALUES (?,?,?);',
             (question,all_answers,good_answer)
             )
@@ -74,19 +74,19 @@ class Question():
 
 
 #####
+if __name__ == "__main__":
+    import config
+    import connect_db as db
 
-import config
-import connect_db as db
+    bdd = db.ConnectDb(config.config)
+    connexion = bdd.connect()
+    cursor = connexion.cursor()
+    test_question = Question(cursor)
 
-bdd = db.ConnectDb(config.config)
-connexion = bdd.connect()
-cursor = connexion.cursor()
-test_question = Question(cursor)
-
-# test_qcm.update_data()
-a=input('id de la question:')
-question_values = {"name": "Ta couleur favorite ?", "answers": "rouge,vert,noir", "correct_answer": "vert"}
-new_question_values ={"name": "Ta couleur favorite ?", "answers": "rouge,vert,noir", "correct_answer": "noir"}
-print(test_question.update_data(a,new_question_values))
+    # test_qcm.update_data()
+    a=input('id de la question:')
+    question_values = {"name": "Ta couleur favorite ?", "answers": "rouge,vert,noir", "correct_answer": "vert"}
+    new_question_values ={"name": "Ta couleur favorite ?", "answers": "rouge,vert,noir", "correct_answer": "noir"}
+    print(test_question.get_data(a))
 
 
