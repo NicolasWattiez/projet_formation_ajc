@@ -5,6 +5,7 @@ USE qcm_app;
 CREATE TABLE `users` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `pseudo` varchar(255),
+  `password` varchar(255),
   `created_at` timestamp
 );
 
