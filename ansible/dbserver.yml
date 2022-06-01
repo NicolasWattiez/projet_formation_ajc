@@ -73,7 +73,7 @@
 
   - name: upload sql table config
     copy:
-      src: "/etc/bdd/schema-bdd.sql"
+      src: "/etc/ansible/bdd/schema-bdd.sql"
       dest: "/tmp/schema-bdd.sql"
 
   - name: add sql table to database

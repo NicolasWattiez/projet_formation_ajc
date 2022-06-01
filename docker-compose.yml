@@ -12,8 +12,8 @@ services:
       /bin/sh -c "apk update 
       &&  apk add openrc ansible openssh-server openssh sshpass
       &&  mkdir /etc/ansible
-      &&  mkdir /etc/src
-      &&  mkdir /etc/bdd
+      &&  mkdir /etc/ansible/src
+      &&  mkdir /etc/ansible/bdd
       &&  sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config 
       &&  echo 'root:toor' | chpasswd 
       &&  ssh-keygen -A

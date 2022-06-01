@@ -10,7 +10,7 @@ pipeline {
     stage('clone'){
       steps {
         git branch: 'main',
-        url: 'https://github.com/NicolasWattiez-projet_formation_ajc'
+        url: 'https://github.com/NicolasWattiez/projet_formation_ajc.git'
         
       }
     }

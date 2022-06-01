@@ -1,7 +1,9 @@
-MARIADB_USER: "user"
+mysql_user: "user"
 
-MARIADB_PASSWORD: "mypassword"
+mysql_password: "mypassword"
 
-DB_NAME: "qcm_app"
+mysql_dbname: "parc_informatique"
 
-DB_HOST: "dbubuntu"
+db_host: "localhost"
+
+root_password: "rootpassword"
