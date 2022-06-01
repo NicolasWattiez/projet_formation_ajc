@@ -11,9 +11,20 @@ class Controller():
 
     def connexion(self):
         pseudo = input("Enter your pseudo: ")
-        # password = input("Enter your password: ")
         password = getpass("Enter your password: ")
-        
+        self.user.get_data(pseudo)
+        dict_user = self.query_to_dictionnary(self.user.cursor)
+        if dict_user == [] :
+            statut_user= False
+            print("pseudo or password are incorrect")
+        else :
+            if dict_user[0]["password"] == password :
+                statut_user= True
+                print("Connexion is successfull")
+                return dict_user 
+            else :
+                statut_user=False
+                print("pseudo or password are incorrect")
 
 
 
