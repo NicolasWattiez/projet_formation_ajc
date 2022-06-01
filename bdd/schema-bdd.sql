@@ -6,6 +6,7 @@ CREATE TABLE if not exists `users` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `pseudo` varchar(255),
   `password` varchar(255),
+  `password` varchar(255),
   `created_at` timestamp
 );
 
@@ -39,9 +40,9 @@ ALTER TABLE `join_qcm_questions` ADD FOREIGN KEY (`qcm_id`) REFERENCES `qcm` (`i
 
 ALTER TABLE `join_qcm_questions` ADD FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`);
 
-INSERT INTO `users` VALUES (1, "user1" ,"password1", NOW());
-INSERT INTO `users` VALUES (2, "user2" ,"password2", NOW());
-INSERT INTO `users` VALUES (3, "user3" ,"password3", NOW());
+INSERT INTO `users` VALUES (1, "user1" ,"password1","member", NOW());
+INSERT INTO `users` VALUES (2, "user2" ,"password2","admin", NOW());
+INSERT INTO `users` VALUES (3, "user3" ,"password3","member", NOW());
 
 USE qcm_app;
 INSERT INTO `questions` VALUES (1, "Isaac Newton était","savant anglais,homme politique américain,musicien de jazz","savant anglais");
