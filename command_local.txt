@@ -4,7 +4,7 @@ sudo systemctl start mariadb.service
 sudo mysql_secure_installation
 
 export MARIADB_USER=user MARIADB_PASSWORD=mdp DB_NAME=qcm_app DB_HOST=localhost
-
+export MARIADB_USER=user MARIADB_PASSWORD=mypassword DB_NAME=qcm_app DB_HOST=appubuntu
 
 
 sudo mariadb -e "GRANT ALL ON *.* TO '$MARIADB_USER'@'$DB_HOST' IDENTIFIED BY '$MARIADB_PASSWORD' WITH GRANT OPTION;"
