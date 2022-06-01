@@ -31,6 +31,13 @@ class Controller():
 
     #### Admin ####
 
+    def create_user(self):
+        name=input("Enter your name :")
+        password=input("Enter your password :")
+        role=input("Enter your role :")
+        self.user.insert_data(name,password,role)
+
+
     def get_qcm(self):
         self.qcm.get_data("")
         return self.query_to_dictionnary(self.qcm.cursor)
