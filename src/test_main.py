@@ -5,6 +5,7 @@ from model.config import config
 from model.question import Question
 from model.qcm import Qcm
 from model.jointure import Jointure
+# from model.jointure import Us
 
 from model import connect_db as db
 
@@ -17,6 +18,7 @@ cursor = connexion.cursor()
 question = Question(cursor)
 qcm = Qcm(cursor)
 jointure = Jointure(cursor)
+# users = Users(cursor)
 
 test = Controller(qcm, question, jointure)
 
@@ -24,9 +26,9 @@ test = Controller(qcm, question, jointure)
 # print(test.get_question())
 
 # test.connexion()
-qcms = test.get_qcm()
-questions = test.select_qcm(qcms)
-test.practice_qcm(question)
+
+questions = test.select_qcm()
+test.practice_qcm(questions)
 
 # test.create_qcm()
 # print(test.get_qcm())

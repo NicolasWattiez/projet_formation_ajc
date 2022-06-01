@@ -1,11 +1,11 @@
 from getpass import getpass
 
 class Controller():
-    def __init__(self, qcm, question, jointure, users) -> None:
+    def __init__(self, qcm, question, jointure) -> None:
         self.qcm = qcm
         self.question = question
         self.jointure = jointure
-        self.users = users
+        # self.users = users
 
     ##### connexion #####
 
@@ -21,7 +21,7 @@ class Controller():
     #### Admin ####
 
     def get_qcm(self):
-        self.qcm.get_data()
+        self.qcm.get_data("")
         return self.query_to_dictionnary(self.qcm.cursor)
 
     def create_qcm(self):
@@ -98,7 +98,9 @@ class Controller():
 
     ##### User ####
 
-    def select_qcm(self, qcms):
+    def select_qcm(self):
+        qcms = self.get_qcm()
+        print("Test:", qcms)
         print("List qcm")
         for qcm in qcms:
             print("- ", qcm["name"])
@@ -106,8 +108,11 @@ class Controller():
             "Please, enter the name of the qcm you want to try: "
         )
         # loop back if incorrect answer
-        dict_qcm = self.qcm.get_data(user_choice)
-        self.jointure.find_questions_from_qcm(dict_qcm)
+        print(user_choice)
+        self.qcm.get_data(user_choice)
+        dict_qcm = self.query_to_dictionnary(self.qcm.cursor)[0]
+        print(dict_qcm)
+        self.jointure.find_questions_from_qcm(dict_qcm["id"])
         questions = self.query_to_dictionnary(self.jointure.cursor)
         print(questions)
         return questions
@@ -118,7 +123,7 @@ class Controller():
         for question in questions:
             print(question["name"])
             for answer in question["answers"].split(","):
-                print(answer)
+                print("- ", answer)
             user_answer = input("Write the corrert answer: ")
             # loop back if answers is not in answers
             if user_answer == question["correct_answer"]:
@@ -131,7 +136,7 @@ class Controller():
 
 
 
-    # move to table
+    # move to table ?
     # Taken from https://stackoverflow.com/questions/28755505/how-to-convert-sql-query-results-into-a-python-dictionary
 
     def query_to_dictionnary(self, cursor):

@@ -95,5 +95,6 @@ if __name__ == "__main__":
     # test_qcm.update_data()
     a=input('id qcm :')
     b=input('id question:')
-    print(test_jointure.find_questions_from_qcm(a))       
+    print(test_jointure.find_questions_from_qcm(a))
+    print(cursor.fetchall())      
 
