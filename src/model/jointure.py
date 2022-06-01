@@ -9,7 +9,7 @@
 from unicodedata import name
 import mariadb
 
-class Jointure:
+class Jointure():
     def __init__(self, cursor):
         self.cursor = cursor
         self.__name = ''
