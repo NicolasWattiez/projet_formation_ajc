@@ -33,7 +33,7 @@ class Controller():
             adding_questions = True
             while adding_questions:
                 dict_new_question = self.create_question()
-                self.question.get_data()
+                self.question.get_data_by_name(dict_new_question["name"])
                 # call create_question() => return question values
                 # question_id from question values
                 # call add_question_to_qcm(id_qcm, id_question)
