@@ -1,7 +1,7 @@
 ---
 - hosts: dbubuntu
   vars_files: 
-  - vars/mariadb_ubuntu.yml
+  - roles/bdd/vars/main.yml
 
   tasks:
   - name: install mysql
@@ -73,17 +73,17 @@
 
   - name: upload sql table config
     copy:
-      src: "files/table.sql"
-      dest: "/tmp/table.sql"
+      src: "/etc/bdd/schema-bdd.sql"
+      dest: "/tmp/schema-bdd.sql"
 
   - name: add sql table to database
     mysql_db:
-      name: parc_informatique
+      name: qcm_app
       state: import
       login_unix_socket: /var/run/mysqld/mysqld.sock
       login_user: root
       login_password: '{{ root_password }}'
-      target: /tmp/table.sql
+      target: /tmp/schema-bdd.sql
 
   - name: "Create {{ mysql_user }} with all {{ mysql_dbname }} privileges"
     mysql_user:
