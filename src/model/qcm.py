@@ -15,14 +15,12 @@ class Qcm:
         if isinstance(name, str):
             self.__name = name
 
-    def get_data(self,name=None):
+    def get_data(self,name):
         name_qcm=name
-        print("name")
-        print("name == None?", name == None)
         # cursor=connexion.cursor()
-        if name == None:
+        if name == "":
             print("all")
-            self.cursor.execute('SELECT * FROM qcm;')      
+            self.cursor.execute('SELECT * FROM qcm;') 
         else:
             print("one")
             self.cursor.execute('SELECT * FROM qcm WHERE name = ?;',
@@ -82,8 +80,9 @@ if __name__ == "__main__":
     # test_qcm.update_data()
     a=input('nom du qcm :')
     b=input('nouveau nom du qcm :')
-    print(test_qcm.update_data(a,b))
-    
+    print(test_qcm.get_data(a))
+    print(cursor.fetchall())
+
 
 
    

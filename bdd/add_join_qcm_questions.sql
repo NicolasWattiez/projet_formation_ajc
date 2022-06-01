@@ -1,5 +1,5 @@
 USE qcm_app;
-INSERT INTO `join_qcm_questions`
+INSERT INTO `join_qcm_questions` 
 VALUES (
   (SELECT id 
   FROM questions

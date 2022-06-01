@@ -17,9 +17,9 @@ class Question():
             self.__name = name
 
 
-    def get_data(self,id=None):
+    def get_data(self,id):
         numero_id=id
-        if id == None:
+        if id == "":
             self.cursor.execute('SELECT * FROM questions;')
         else: 
             self.cursor.execute('SELECT * FROM questions WHERE id = ?;',
@@ -92,7 +92,8 @@ if __name__ == "__main__":
     nameforfind="test ?"
     question_values = {"name": "Ton fruit encore ?", "answers": "orange,bananane,kiwi", "correct_answer": "kiwi"}
     new_question_values ={"name": "Ta couleur favorite again ?", "answers": "rouge,vert,noir", "correct_answer": "noir"}
-    print(test_question.get_data_by_name(nameforfind))
+    print(test_question.get_data(a))
+    print(cursor.fetchall())
 
 
 
