@@ -18,3 +18,5 @@ jointure = Jointure(cursor)
 controller = Controller(qcm, question, jointure)
 
 dict_users = controller.connexion()
+
+

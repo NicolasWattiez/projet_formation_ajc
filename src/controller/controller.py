@@ -9,6 +9,10 @@ class Controller():
 
     ##### connexion #####
 
+    def main(self):
+        pass
+
+
     def connexion(self):
         pseudo = input("Enter your pseudo: ")
         password = getpass("Enter your password: ")
@@ -24,12 +28,58 @@ class Controller():
                 return dict_user 
             else :
                 statut_user=False
-                print("pseudo or password are incorrect")
+                print("Pseudo or password are incorrect")
 
 
 
 
     #### Admin ####
+
+    def admin_mode(self):
+        print('What do you want to manage?')
+        user_choice = input('Enter "1" for the qcm or "2" for the question \n')
+        if user_choice == '1':
+            self.admin_mode_qcm()
+        elif user_choice == '2':
+            self.admin_mode_question()
+        else:
+            print("Input is incorrect")
+
+    def admin_mode_qcm(self):
+        print('What do you want to do?')
+        user_choice = input('Enter "1" to list all qcm, "2" to create a new qcm, "3" to remove a qcm, "4" to update a qcm \n')
+        if user_choice == '1':
+            self.get_qcm()
+        elif user_choice == '2':
+            self.create_qcm()
+        elif user_choice == '3':
+            self.remove_qcm()
+        elif user_choice == '4':
+            self.update_qcm()
+        else:
+            print("Input is incorrect")
+
+    def admin_mode_question(self):
+        print('What do you want to do?')
+        user_choice = input(
+            'Enter "1" to list all question, "2" to create a new question, \
+            "3" to remove a question, "4" to update a question, \
+            "5" to add a question to a qcm, "6" to remove a question from a qcm \n'
+            )
+        if user_choice == '1':
+            self.get_question()
+        elif user_choice == '2':
+            self.create_question()
+        elif user_choice == '3':
+            self.remove_question()
+        elif user_choice == '4':
+            self.update_question()
+        elif user_choice == '5':
+            self.add_question_to_qcm()
+        elif user_choice == '6':
+            self.remove_question_from_qcm()
+        else:
+            print("Input is incorrect")
 
     def get_qcm(self):
         self.qcm.get_data("")
@@ -108,6 +158,12 @@ class Controller():
 
 
     ##### User ####
+
+
+    def user_mode(self):
+        questions = self.select_qcm()
+        self.practice_qcm(questions)
+
 
     def select_qcm(self):
         qcms = self.get_qcm()
