@@ -6,7 +6,7 @@ CREATE TABLE if not exists `users` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `pseudo` varchar(255),
   `password` varchar(255),
-  `password` varchar(255),
+  `role` varchar(255),
   `created_at` timestamp
 );
 
