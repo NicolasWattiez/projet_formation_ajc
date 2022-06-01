@@ -45,8 +45,8 @@ docker-compose up -d
 Copiet le contenu du dossier ansible, src et bdd dans le conteneur master : 
 ```
 docker cp ansible/. master:/etc/ansible/
-docker cp bdd/. master:/etc/ansible/
-docker cp src/. master:/etc/ansible/
+docker cp bdd/. master:/etc/ansible/bdd/
+docker cp src/. master:/etc/ansible/src/
 ```
 Copier le Jenkinsfile dans le conteneur jenkins
 ```
