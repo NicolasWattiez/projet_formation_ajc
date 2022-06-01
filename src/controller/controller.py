@@ -1,10 +1,11 @@
 from getpass import getpass
 
 class Controller():
-    def __init__(self, qcm, question, jointure) -> None:
+    def __init__(self, qcm, question, jointure, users) -> None:
         self.qcm = qcm
         self.question = question
         self.jointure = jointure
+        self.users = users
 
     ##### connexion #####
 
@@ -26,35 +27,40 @@ class Controller():
     def create_qcm(self):
         new_qcm_name = input('Enter the name of the new qcm: ')
         self.qcm.insert_data(new_qcm_name)
-        user_choice = input('Enter "yes" if you want to add questiond now: ')
+        user_choice = input('Enter "yes" if you want to add question now: ')
         if user_choice == 'yes':
             self.qcm.get_data(new_qcm_name)
             dict_new_qcm = self.query_to_dictionnary(self.qcm.cursor)
             adding_questions = True
             while adding_questions:
-                dict_new_question = self.create_question()
-                self.question.get_data_by_name(dict_new_question["name"])
-                # call create_question() => return question values
-                # question_id from question values
-                # call add_question_to_qcm(id_qcm, id_question)
-        pass
+                new_question_values = self.create_question()
+                dict_new_question = self.question.get_data_by_name(new_question_values["name"])
+                self.add_question_to_qcm(dict_new_qcm["id"], dict_new_question["id"])
+
 
 
     def remove_qcm(self):
-        name_qcm_to_delete = input("Enter the name of the qcm to delete")
+        name_qcm_to_delete = input("Enter the name of the qcm to delete: ")
         id_qcm_to_delete = self.qcm.get_data(name_qcm_to_delete)
-        # question do you want to also remove related question # WARNING the questions will also be removed from all qcm
-            # get related id_question
-        # remove in join_qcm_questions by qcm_id 
-            # and remove related id_question
+        user_choice = input(
+            """Enter "yes" if you want to remove all related questions now 
+            (WARNING, do note that all questions linked to this qcm will be removed and this cannot be undone): """
+            )
+        if user_choice == "yes":
+            self.jointure.find_questions_from_qcm(id_qcm_to_delete)
+            dict_related_questions = self.query_to_dictionnary(self.qcm.cursor)
+            self.jointure.delete_all_link_qcm(id_qcm_to_delete)
+            for question in dict_related_questions:
+                self.question.remove_data(question["id"])
         self.qcm.remove_data(name_qcm_to_delete)
-            # remove id_question from question
-        # commit change
-        pass
 
     def update_qcm(self):
-        # check if qcm exists
-        pass
+        name_qcm_to_update = input("Enter the name of the qcm to delete: ")
+        if self.qcm.get_data(name_qcm_to_update) != []: 
+            self.question.update_data()
+        else:
+            print("The qcm doesn't exist!")
+
 
     def get_question(self):
         self.question.get_data()
@@ -70,15 +76,18 @@ class Controller():
         question_values.update({"name": question, "answers": answers, "correct_answer": correct_answer})
         self.question.insert_data(question_values)
         return question_values
-        # ask if the user want to add the question to a qcm (put that outside?)
 
     def remove_question(self, id):
         self.jointure.delete_all_link_question(id)
         self.question.remove_data(id)
 
     def update_question(self):
-        # check if question exists
-        pass
+        id_question_to_update = input("Enter the name of the qcm to delete: ")
+        if self.question.get_data(id_question_to_update) != []: 
+            self.question.update_data()
+        else:
+            print("The question doesn't exist!")
+
 
     def add_question_to_qcm(self, id_qcm, id_question):
         self.jointure.link_qcm_question(id_qcm, id_question)
@@ -90,13 +99,18 @@ class Controller():
     ##### User ####
 
     def select_qcm(self, qcms):
+        print("List qcm")
         for qcm in qcms:
-            print(qcm["name"])
+            print("- ", qcm["name"])
         user_choice = input(
-            "Please, enter the name of your choice"
+            "Please, enter the name of the qcm you want to try: "
         )
         # loop back if incorrect answer
-        return user_choice
+        dict_qcm = self.qcm.get_data(user_choice)
+        self.jointure.find_questions_from_qcm(dict_qcm)
+        questions = self.query_to_dictionnary(self.jointure.cursor)
+        print(questions)
+        return questions
 
 
 
