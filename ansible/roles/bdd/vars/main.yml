@@ -1,0 +1,7 @@
+MARIADB_USER: "user"
+
+MARIADB_PASSWORD: "mypassword"
+
+DB_NAME: "qcm_app"
+
+DB_HOST: "dbubuntu"

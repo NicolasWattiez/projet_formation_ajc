@@ -1,7 +1,7 @@
 ---
 - hosts: appubuntu
   vars_files:
-    vars/app_ubuntu.yml
+    roles/app/vars/main.yml
   # roles:
   #   - app
   tasks:
@@ -18,5 +18,5 @@
 
   - name: upload app source
     copy:
-      src: /etc/ansible/files/src/
+      src: /etc/src/
       dest: ~/

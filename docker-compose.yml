@@ -1,0 +1,87 @@
+version: "3.7"
+services:
+  master:
+    links:
+      - jenkins
+    image: alpine:latest
+    container_name: master
+    hostname: master
+    stdin_open: true
+    tty: true
+    command : >
+      /bin/sh -c "apk update 
+      &&  apk add openrc ansible openssh-server openssh sshpass
+      &&  mkdir /etc/ansible
+      &&  mkdir /etc/src
+      &&  mkdir /etc/bdd
+      &&  sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config 
+      &&  echo 'root:toor' | chpasswd 
+      &&  ssh-keygen -A
+      && /usr/sbin/sshd -D
+      && /bin/sh"
+    expose: 
+      - 22
+    volumes:
+      - ansible_vol:/var/ans
+  host:
+    links:
+      - master
+    image: ubuntu
+    container_name: appubuntu
+    hostname: appubuntu
+    stdin_open: true
+    tty: true
+    command : >
+      bash -c "apt update && apt upgrade -y 
+      &&  DEBIAN_FRONTEND=noninteractive 
+      &&  mkdir -p /run/sshd
+      &&  apt install -y apt --no-install-recommends openssh-server python3
+      &&  sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+      &&  sed -i 's/#PubkeyAuthentication yes/PubkeyAuthentication yes/' /etc/ssh/sshd_config
+      &&  echo 'root:toor' | chpasswd 
+      && /usr/sbin/sshd -D"
+    expose: 
+      - 22
+    ports:
+      - 8042:80
+    volumes:
+     - ansible_vol:/var/ans
+
+  host01:
+    links:
+      - master
+    image: ubuntu
+    container_name: dbubuntu
+    hostname: dbubuntu
+    stdin_open: true
+    tty: true
+    command : >
+      bash -c "apt update && apt upgrade -y 
+      &&  DEBIAN_FRONTEND=noninteractive 
+      &&  mkdir -p /run/sshd
+      &&  apt install -y apt --no-install-recommends openssh-server python3  
+      &&  sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+      &&  sed -i 's/#PubkeyAuthentication yes/PubkeyAuthentication yes/' /etc/ssh/sshd_config
+      &&  echo 'root:toor' | chpasswd 
+      && /usr/sbin/sshd -D"
+    expose:
+      - 22
+    ports:
+      - 3307:3306
+    volumes:
+     - ansible_vol:/var/ans
+
+  jenkins:
+    build: ./jenkins
+    ports: 
+      - "8098:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    container_name: jenkins
+
+
+volumes:
+  ansible_vol:
+  jenkins_home: {}
+  dbcentos_vol:
