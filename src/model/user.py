@@ -19,12 +19,14 @@ class User:
         )
 
 
-    def create_user(self,name,password):
+    def insert_data(self,name,password,role):
         user_name=name
         user_password=password
-        self.cursor.execute('INSERT INTO `users`(pseudo,password,created_at) VALUES (? ,?, NOW());',
-        (user_name,user_password)
+        user_role=role
+        self.cursor.execute('INSERT INTO `users`(pseudo,password,role,created_at) VALUES (? ,?,?, NOW());',
+        (user_name,user_password,user_role)
         )
+        
 
 
 
@@ -43,5 +45,6 @@ if __name__ == "__main__":
    # test_qcm.update_data()
     a=input('pseudo utilisateur :')
     b=input('paswword :')
-    print(test_user.get_data(a))
-    print(cursor.fetchall())
+    c=input('role :')
+    print(test_user.insert_data(a,b,c))
+    

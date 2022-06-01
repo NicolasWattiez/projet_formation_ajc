@@ -37,11 +37,13 @@ class Controller():
 
     def admin_mode(self):
         print('What do you want to manage?')
-        user_choice = input('Enter "1" for the qcm or "2" for the question \n')
+        user_choice = input('Enter "1" for the qcms or "2" for the questions, "3" for the users \n')
         if user_choice == '1':
             self.admin_mode_qcm()
         elif user_choice == '2':
             self.admin_mode_question()
+        elif user_choice == '3':
+            self.admin_mode_user()
         else:
             print("Input is incorrect")
 
@@ -80,6 +82,13 @@ class Controller():
             self.remove_question_from_qcm()
         else:
             print("Input is incorrect")
+            
+    def create_user(self):
+        name=input("Enter your name :")
+        password=input("Enter your password :")
+        role=input("Enter your role :")
+        self.user.insert_data(name,password,role)
+
 
     def get_qcm(self):
         self.qcm.get_data("")
