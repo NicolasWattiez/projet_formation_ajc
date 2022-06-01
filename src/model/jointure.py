@@ -73,9 +73,9 @@ class Jointure:
             self.cursor.execute('SELECT id,name,answers,correct_answer FROM (SElECT * FROM questions INNER JOIN join_qcm_questions WHERE join_qcm_questions.question_id=questions.id ) AS a WHERE qcm_id = ?;',
             (idqcm,)
             )
-            list_id_question=cursor.fetchall()
+            # list_id_question=cursor.fetchall()k
             # connexion.commit()
-            return list_id_question
+            # return list_id_question
         except mariadb.Error as e:
             return ' Erreur lors de la création du lien{e}'  
 

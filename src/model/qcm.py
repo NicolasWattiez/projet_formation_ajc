@@ -80,9 +80,9 @@ if __name__ == "__main__":
     test_qcm = Qcm(cursor)
 
     # test_qcm.update_data()
-    a=input('nom du qcm :')
-    b=input('nouveau nom du qcm :')
-    print(test_qcm.update_data(a,b))
+    # a=input('nom du qcm :')
+    # b=input('nouveau nom du qcm :')
+    print(test_qcm.get_data("Musique"))
     
 
 

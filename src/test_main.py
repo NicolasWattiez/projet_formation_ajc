@@ -20,12 +20,13 @@ jointure = Jointure(cursor)
 
 test = Controller(qcm, question, jointure)
 
-print(test.get_qcm())
-print(test.get_question())
+# print(test.get_qcm())
+# print(test.get_question())
 
-test.connexion()
-# question = test.get_question()
-# test.practice_qcm(question)
+# test.connexion()
+qcms = test.get_qcm()
+questions = test.select_qcm(qcms)
+test.practice_qcm(question)
 
 # test.create_qcm()
 # print(test.get_qcm())
