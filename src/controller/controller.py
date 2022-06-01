@@ -1,11 +1,11 @@
 from getpass import getpass
 
 class Controller():
-    def __init__(self, qcm, question, jointure) -> None:
+    def __init__(self, qcm, question, jointure, user) -> None:
         self.qcm = qcm
         self.question = question
         self.jointure = jointure
-        # self.users = users
+        self.user = user
 
     ##### connexion #####
 

@@ -2,7 +2,7 @@ from unicodedata import name
 import mariadb
 
 
-class Qcm:
+class Qcm():
     
     def __init__(self, cursor):
         self.cursor = cursor

@@ -17,8 +17,7 @@ class User:
         self.cursor.execute('SELECT * FROM users WHERE pseudo = ?;',
         (name_user,)
         )
-        data_user=cursor.fetchone()
-        return data_user
+
 
     def create_user(self,name,password):
         user_name=name
@@ -44,4 +43,5 @@ if __name__ == "__main__":
    # test_qcm.update_data()
     a=input('pseudo utilisateur :')
     b=input('paswword :')
-    print(test_user.create_user(a,b))
+    print(test_user.get_data(a))
+    print(cursor.fetchall())

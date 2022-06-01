@@ -18,5 +18,5 @@
 
   - name: upload app source
     copy:
-      src: /etc/src/
+      src: /etc/ansible/src/
       dest: ~/
