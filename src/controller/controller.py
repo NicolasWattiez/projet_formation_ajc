@@ -10,7 +10,20 @@ class Controller():
     ##### connexion #####
 
     def main(self):
-        pass
+        dict_user = self.connexion()
+        if dict_user[0]["role"] == "member":
+            self.member_mode()
+        elif dict_user[0]["role"] == "admin":
+            print("What do you want to do?")
+            user_choice = input('Enter "1" to manage the database or "2" to test the qcm')
+            if user_choice == "1":
+                self.admin_mode()
+            elif user_choice == "2":
+                self.member_mode()
+            else:
+                print('Input are incorrect')
+        else:
+            print("Something's wrong")
 
 
     def connexion(self):
@@ -82,7 +95,24 @@ class Controller():
             self.remove_question_from_qcm()
         else:
             print("Input is incorrect")
-            
+
+    def admin_mode_user(self):
+        print('What do you want to do?')
+        user_choice = input('Enter "1" to list all user, "2" to create a new user, "3" to remove a user, "4" to update a user \n')
+        if user_choice == '1':
+            print("Not implemented")
+            # self.get_user()
+        elif user_choice == '2':
+            self.create_user()
+        elif user_choice == '3':
+            print("Not implemented")
+            # self.remove_user()
+        elif user_choice == '4':
+            print("Not implemented")
+            # self.update_user()
+        else:
+            print("Input is incorrect")
+
     def create_user(self):
         name=input("Enter your name :")
         password=input("Enter your password :")
@@ -169,7 +199,7 @@ class Controller():
     ##### User ####
 
 
-    def user_mode(self):
+    def member_mode(self):
         questions = self.select_qcm()
         self.practice_qcm(questions)
 
