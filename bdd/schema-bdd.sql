@@ -46,14 +46,14 @@ INSERT INTO `users` VALUES (2, "user1" ,"password1","member", NOW());
 INSERT INTO `users` VALUES (3, "user2" ,"password","member", NOW());
 
 USE qcm_app;
-INSERT INTO `questions` VALUES (1, "Isaac Newton était","savant anglais,homme politique américain,musicien de jazz","savant anglais");
-INSERT INTO `questions` VALUES (2, "Que c'est il passé le 6 juin 1944?","Armistice 2nd Guerre Mondiale,Débarquement en Normandie,Libération de Paris","Débarquement en Normandie");
-INSERT INTO `questions` VALUES (3, "De quel handicap souffrait Ludwig van Beethoven?","Surdité,Cécité politique américain,Démence","Surdité");
-INSERT INTO `questions` VALUES (4, "Quel compositeur n'est pas représenté dans le film Amadeus?","Mozart,Salieri,Praetorius","Praetorius");
+INSERT INTO `questions` VALUES (1, "Isaac Newton was","an english scientist,americain politician,jazz musician","an english scientist");
+INSERT INTO `questions` VALUES (2, "What happend on June 6, 1944?","World War 2 armistice,Landing in Normandy,liberation of Paris","Landing in Normandy");
+INSERT INTO `questions` VALUES (3, "What disability did Ludwig van Beethoven suffer from?","Deafness,Blindness,Dementia","Deafness");
+INSERT INTO `questions` VALUES (4, "Which composer did not appear in the movie Amadeus?","Mozart,Salieri,Praetorius","Praetorius");
 
 USE qcm_app;
-INSERT INTO `qcm` VALUES (1, "Histoire");
-INSERT INTO `qcm` VALUES (2, "Musique");
+INSERT INTO `qcm` VALUES (1, "History");
+INSERT INTO `qcm` VALUES (2, "Music");
 
 USE qcm_app;
 INSERT INTO `join_user_qcm`
@@ -63,7 +63,7 @@ VALUES (
   WHERE pseudo = "user1"),
   (SELECT id 
   FROM qcm 
-  WHERE name = "Musique")
+  WHERE name = "Music")
 );
 
 USE qcm_app;
@@ -71,38 +71,38 @@ INSERT INTO `join_qcm_questions`
 VALUES (
   (SELECT id 
   FROM questions
-  WHERE name ="Isaac Newton était"),
+  WHERE name ="Isaac Newton was"),
   (SELECT id 
   FROM qcm 
-  WHERE name = "Histoire")
+  WHERE name = "History")
 );
 
 INSERT INTO `join_qcm_questions`
 VALUES (
   (SELECT id 
   FROM questions
-  WHERE name ="Que c'est il passé le 6 juin 1944?"),
+  WHERE name ="What happend on June 6, 1944?"),
   (SELECT id 
   FROM qcm 
-  WHERE name = "Histoire")
+  WHERE name = "History")
 );
 
 INSERT INTO `join_qcm_questions`
 VALUES (
   (SELECT id 
   FROM questions
-  WHERE name ="De quel handicap souffrait Ludwig van Beethoven?"),
+  WHERE name ="What disability did Ludwig van Beethoven suffer from"),
   (SELECT id 
   FROM qcm 
-  WHERE name = "Musique")
+  WHERE name = "Music")
 );
 
 INSERT INTO `join_qcm_questions`
 VALUES (
   (SELECT id 
   FROM questions
-  WHERE name ="Quel compositeur n'est pas représenté dans le film Amadeus?"),
+  WHERE name ="Which composer did not appear in the movie Amadeus?"),
   (SELECT id 
   FROM qcm 
-  WHERE name = "Musique")
+  WHERE name = "Music")
 );
