@@ -23,7 +23,9 @@ user= User(cursor)
 # users = Users(cursor)
 
 test = Controller(qcm, question, jointure,user)
-print(test.create_user())
+a=input('id :')
+b= {"name": "fruit ?", "answers": "orange,bananane,kiwi", "correct_answer": "kiwi"}
+print(test.update_question())
 
 # print(test.get_qcm())
 # print(test.get_question())

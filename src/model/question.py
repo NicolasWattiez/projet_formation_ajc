@@ -91,8 +91,8 @@ if __name__ == "__main__":
     a=input('id de la question:')
     nameforfind="test ?"
     question_values = {"name": "Ton fruit encore ?", "answers": "orange,bananane,kiwi", "correct_answer": "kiwi"}
-    new_question_values ={"name": "Ta couleur favorite again ?", "answers": "rouge,vert,noir", "correct_answer": "noir"}
-    print(test_question.get_data(a))
+    new_question_values ={"name": " A Ta couleur favorite again ?", "answers": "rouge,vert,noir", "correct_answer": "noir"}
+    print(test_question.update_data(a,new_question_values))
     print(cursor.fetchall())
 
 
