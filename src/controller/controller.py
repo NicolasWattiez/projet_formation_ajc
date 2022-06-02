@@ -199,10 +199,14 @@ class Controller():
             print("The question doesn't exist!")
 
 
-    def add_question_to_qcm(self, id_qcm, id_question):
+    def add_question_to_qcm(self):
+        id_qcm = input("Enter the id of the qcm: ")
+        id_question = input("Enter the id of the question: ")
         self.jointure.link_qcm_question(id_qcm, id_question)
 
-    def remove_question_from_qcm(self, id_qcm,  id_question):
+    def remove_question_from_qcm(self):
+        id_qcm = input("Enter the id of the qcm: ")
+        id_question = input("Enter the id of the question: ")
         self.jointure.delete_link_qcm_question(id_qcm, id_question)
 
 
