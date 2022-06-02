@@ -1,3 +1,4 @@
+import sys
 from getpass import getpass
 
 class Controller():
@@ -34,6 +35,7 @@ class Controller():
         if dict_user == [] :
             statut_user= False
             print("pseudo or password are incorrect")
+            sys.exit()
         else :
             if dict_user[0]["password"] == password :
                 statut_user= True
@@ -42,6 +44,7 @@ class Controller():
             else :
                 statut_user=False
                 print("Pseudo or password are incorrect")
+                sys.exit()
 
 
 
@@ -64,7 +67,7 @@ class Controller():
         print('What do you want to do?')
         user_choice = input('Enter "1" to list all qcm, "2" to create a new qcm, "3" to remove a qcm, "4" to update a qcm \n')
         if user_choice == '1':
-            self.get_qcm()
+            print(self.get_qcm())
         elif user_choice == '2':
             self.create_qcm()
         elif user_choice == '3':
@@ -82,7 +85,7 @@ class Controller():
             "5" to add a question to a qcm, "6" to remove a question from a qcm \n'
             )
         if user_choice == '1':
-            self.get_question()
+            print(self.get_question())
         elif user_choice == '2':
             self.create_question()
         elif user_choice == '3':
@@ -131,11 +134,12 @@ class Controller():
         if user_choice == 'yes':
             self.qcm.get_data(new_qcm_name)
             dict_new_qcm = self.query_to_dictionnary(self.qcm.cursor)
-            adding_questions = True
-            while adding_questions:
+            adding_questions = "yes"
+            while adding_questions == "yes":
                 new_question_values = self.create_question()
                 dict_new_question = self.question.get_data_by_name(new_question_values["name"])
                 self.add_question_to_qcm(dict_new_qcm["id"], dict_new_question["id"])
+                adding_questions = input('Enter "yes" if you want to add another question: ')
 
 
 
@@ -163,28 +167,34 @@ class Controller():
 
 
     def get_question(self):
-        self.question.get_data()
+        self.question.get_data("")
         return self.query_to_dictionnary(self.question.cursor)
 
 
     def create_question(self):
         question_values = {"name": "", "answers": "", "correct_answer": ""}
-        question_values["name"]
         question = input("Enter the question: ")
         answers = input("Enter the answers: ")
-        correct_answer = input("Enter the question: ")
+        correct_answer = input("Enter the correct answer: ")
         question_values.update({"name": question, "answers": answers, "correct_answer": correct_answer})
         self.question.insert_data(question_values)
+        print("Question had been added!")
         return question_values
 
-    def remove_question(self, id):
-        self.jointure.delete_all_link_question(id)
-        self.question.remove_data(id)
+    def remove_question(self):
+        id_question_to_remove = input("Enter the id of the question you want to remove: ")
+        self.jointure.delete_all_link_question(id_question_to_remove)
+        self.question.remove_data(id_question_to_remove)
 
     def update_question(self):
-        id_question_to_update = input("Enter the name of the qcm to delete: ")
+        id_question_to_update = input("Enter the id of the question to update: ")
         if self.question.get_data(id_question_to_update) != []: 
-            self.question.update_data()
+            question_values = {"name": "", "answers": "", "correct_answer": ""}
+            question = input("Enter the new question: ")
+            answers = input("Enter the new answers: ")
+            correct_answer = input("Enter the new correct answer: ")
+            question_values.update({"name": question, "answers": answers, "correct_answer": correct_answer})
+            self.question.update_data(id_question_to_update, question_values)
         else:
             print("The question doesn't exist!")
 
