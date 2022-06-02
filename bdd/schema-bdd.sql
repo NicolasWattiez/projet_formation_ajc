@@ -1,3 +1,4 @@
+DROP DATABASE qcm_app;
 CREATE DATABASE if not exists qcm_app;
 
 USE qcm_app;
@@ -42,7 +43,7 @@ ALTER TABLE `join_qcm_questions` ADD FOREIGN KEY (`question_id`) REFERENCES `que
 
 INSERT INTO `users` VALUES (1, "admin" ,"admin","admin", NOW());
 INSERT INTO `users` VALUES (2, "user1" ,"password1","member", NOW());
-INSERT INTO `users` VALUES (3, "user2" ,"password2","member", NOW());
+INSERT INTO `users` VALUES (3, "user2" ,"password","member", NOW());
 
 USE qcm_app;
 INSERT INTO `questions` VALUES (1, "Isaac Newton était","savant anglais,homme politique américain,musicien de jazz","savant anglais");
