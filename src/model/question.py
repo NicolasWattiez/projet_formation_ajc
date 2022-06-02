@@ -28,7 +28,7 @@ class Question():
     
     def get_data_by_name(self,name):
         nametofind=name
-        self.cursor.execute('SELECT id FROM questions WHERE name = ?;',
+        self.cursor.execute('SELECT * FROM questions WHERE name = ?;',
         (nametofind,)
         )
 

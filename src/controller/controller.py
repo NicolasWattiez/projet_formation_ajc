@@ -137,10 +137,9 @@ class Controller():
             adding_questions = "yes"
             while adding_questions == "yes":
                 new_question_values = self.create_question()
-                print(new_question_values)
-                dict_new_question = self.question.get_data_by_name(new_question_values["name"])
-                print(dict_new_question)
-                self.add_question_to_qcm(dict_new_qcm[0]["id"], dict_new_question[0]["id"])
+                self.question.get_data_by_name(new_question_values["name"])
+                dict_new_question = self.query_to_dictionnary(self.qcm.cursor)
+                self.add_question_to_qcm2(dict_new_qcm[0]["id"], dict_new_question[0]["id"])
                 adding_questions = input('Enter "yes" if you want to add another question: ')
 
 
@@ -205,6 +204,9 @@ class Controller():
         id_qcm = input("Enter the id of the qcm: ")
         id_question = input("Enter the id of the question: ")
         self.jointure.link_qcm_question(id_qcm, id_question)
+    
+    def add_question_to_qcm2(self, id_qcm, id_question):
+        self.jointure.link_qcm_question(id_qcm, id_question)
 
     def remove_question_from_qcm(self):
         id_qcm = input("Enter the id of the qcm: ")
@@ -222,7 +224,6 @@ class Controller():
 
     def select_qcm(self):
         qcms = self.get_qcm()
-        print("Test:", qcms)
         print("List qcm")
         for qcm in qcms:
             print("- ", qcm["name"])
