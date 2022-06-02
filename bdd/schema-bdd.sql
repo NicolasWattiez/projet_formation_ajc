@@ -1,4 +1,4 @@
-DROP DATABASE qcm_app;
+DROP DATABASE IF EXISTS qcm_app;
 CREATE DATABASE if not exists qcm_app;
 
 USE qcm_app;
