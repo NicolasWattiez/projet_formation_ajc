@@ -138,6 +138,7 @@ class Controller():
             adding_questions = "yes"
             while adding_questions == "yes":
                 new_question_values = self.create_question()
+                print(new_question_values)
                 dict_new_question = self.question.get_data_by_name(new_question_values["name"])
                 print(dict_new_question)
                 self.add_question_to_qcm(dict_new_qcm[0]["id"], dict_new_question[0]["id"])
@@ -230,13 +231,10 @@ class Controller():
             "Please, enter the name of the qcm you want to try: "
         )
         # loop back if incorrect answer
-        print(user_choice)
         self.qcm.get_data(user_choice)
         dict_qcm = self.query_to_dictionnary(self.qcm.cursor)[0]
-        print(dict_qcm)
         self.jointure.find_questions_from_qcm(dict_qcm["id"])
         questions = self.query_to_dictionnary(self.jointure.cursor)
-        print(questions)
         return questions
 
 
