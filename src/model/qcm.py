@@ -19,10 +19,8 @@ class Qcm():
         name_qcm=name
         # cursor=connexion.cursor()
         if name == "":
-            print("all")
             self.cursor.execute('SELECT * FROM qcm;') 
         else:
-            print("one")
             self.cursor.execute('SELECT * FROM qcm WHERE name = ?;',
             (name_qcm,)
             )

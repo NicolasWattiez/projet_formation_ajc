@@ -16,7 +16,7 @@ class Controller():
             self.member_mode()
         elif dict_user[0]["role"] == "admin":
             print("What do you want to do?")
-            user_choice = input('Enter "1" to manage the database or "2" to test the qcm')
+            user_choice = input('Enter "1" to manage the database or "2" to test the qcm: \n')
             if user_choice == "1":
                 self.admin_mode()
             elif user_choice == "2":
@@ -134,7 +134,6 @@ class Controller():
         if user_choice == 'yes':
             self.qcm.get_data(new_qcm_name)
             dict_new_qcm = self.query_to_dictionnary(self.qcm.cursor)
-            print(dict_new_qcm)
             adding_questions = "yes"
             while adding_questions == "yes":
                 new_question_values = self.create_question()
