@@ -91,7 +91,7 @@ INSERT INTO `join_qcm_questions`
 VALUES (
   (SELECT id 
   FROM questions
-  WHERE name ="What disability did Ludwig van Beethoven suffer from"),
+  WHERE name ="What disability did Ludwig van Beethoven suffer from?"),
   (SELECT id 
   FROM qcm 
   WHERE name = "Music")
