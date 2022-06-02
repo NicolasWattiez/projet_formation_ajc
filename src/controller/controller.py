@@ -134,11 +134,13 @@ class Controller():
         if user_choice == 'yes':
             self.qcm.get_data(new_qcm_name)
             dict_new_qcm = self.query_to_dictionnary(self.qcm.cursor)
+            print(dict_new_qcm)
             adding_questions = "yes"
             while adding_questions == "yes":
                 new_question_values = self.create_question()
                 dict_new_question = self.question.get_data_by_name(new_question_values["name"])
-                self.add_question_to_qcm(dict_new_qcm["id"], dict_new_question["id"])
+                print(dict_new_question)
+                self.add_question_to_qcm(dict_new_qcm[0]["id"], dict_new_question[0]["id"])
                 adding_questions = input('Enter "yes" if you want to add another question: ')
 
 
